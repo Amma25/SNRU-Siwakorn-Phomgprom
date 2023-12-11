@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>W3.CSS Template</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+</div>
+
+<body>
+
+    <!-- Navbar (sit on top) -->
+    <div class="w3-top">
+        <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+            <a href="#home" class="w3-bar-item w3-button"><b>SNRU</b> SIWAKORN</a>
+            <!-- Float links to the right. Hide them on small screens -->
+            <div class="w3-right w3-hide-small">
+                <a href="index.html" class="w3-bar-item w3-button">Home</a>
+                <a href="java.html" class="w3-bar-item w3-button">JS Project</a>
+                <a href="api.html" class="w3-bar-item w3-button">Api</a>
+            </div>
+        </div>
+    </div>
+    <!-- Page content -->
+    <div class="w3-content w3-padding-64 w3-margin-top" style="max-width:1564px"></div>
+    <div>
+        <h2>1.Who i am?</h2>
+        <p id="demo"></p>
+        <button onclick="myfunction()">Click Now!</button>
+    </div>
+    <div>
+        <h2>2.SIWAKORNPHONGPROM!</h2>
+        <p id="demo2"></p>
+    </div>
+
+    <div>
+        <div>
+            <h2>3. Rectangle Area Calculation</h2>
+            <label for="lengthInput">Length:</label>
+            <input type="number" id="lengthInput" placeholder="Enter length">
+            <label for="widthInput">Width:</label>
+            <input type="number" id="widthInput" placeholder="Enter width">
+            <button onclick="calculateRectangleArea()">Calculate Area</button>
+            <p id="rectangleAreaResult"></p>
+        </div>
+    </div>
+    <div>
+        <h2>4. Interest Rate Calculation</h2>
+        <label for="principalInput">Principal Amount:</label>
+        <input type="number" id="principalInput" placeholder="Enter principal amount">
+        <label for="rateInput">Interest Rate (%):</label>
+        <input type="number" id="rateInput" placeholder="Enter interest rate">
+        <label for="timeInput">Time (years):</label>
+        <input type="number" id="timeInput" placeholder="Enter time in years">
+        <button onclick="calculateInterest()">Calculate Interest</button>
+        <p id="interestResult"></p>
+    </div>
+    </div>
+
+    <div>
+        <h2>5. Triangle Area Calculation</h2>
+        <label for="baseInput">Base:</label>
+        <input type="number" id="baseInput" placeholder="Enter base length">
+        <label for="heightInput">Height:</label>
+        <input type="number" id="heightInput" placeholder="Enter height">
+        <button onclick="calculateTriangleArea()">Calculate Area</button>
+        <p id="triangleAreaResult"></p>
+    </div>
+    </div>
+
+    <hr>
+
+    <script>
+        function myfunction() {
+            document.getElementById("demo").innerHTML = "SIWAKORN PHONGPROM"
+        }
+
+        function printAlphabets() {
+            const alphabets = 'SIWAKORNPHONGPROM';
+
+            alphabets.split('').forEach((alphabet, index) => {
+                setTimeout(() => {
+                    document.getElementById('demo2').innerHTML += alphabet;
+                    console.log(alphabet);
+                }, index * 1000);
+            });
+        }
+
+        printAlphabets();
+
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+    <canvas id="myChart"></canvas>
+    <!-- <canvas id="myChart2"></canvas> -->
+
+    <script>
+        const xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+        const yValues = [55, 49, 44, 24, 15];
+        const barColors = ["red", "green", "blue", "orange", "brown"];
+
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {}
+        });
+    </script>
+    <hr>
+
+    <hr>
+    <script>
+        new Chart("myChart2", {
+            type: "pie",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "World Wide Wine Production"
+                }
+            }
+        });
+
+
+    </script>
+
+    <script>
+        function calculateRectangleArea() {
+            const length = document.getElementById('lengthInput').value;
+            const width = document.getElementById('widthInput').value;
+
+            if (length && width) {
+                const area = length * width;
+                document.getElementById('rectangleAreaResult').innerHTML = `Rectangle Area: ${area} square units`;
+            } else {
+                document.getElementById('rectangleAreaResult').innerHTML = 'Please enter valid values for length and width.';
+            }
+        }
+    </script>
+    <script>
+        function calculateInterest() {
+            const principal = document.getElementById('principalInput').value;
+            const rate = document.getElementById('rateInput').value;
+            const time = document.getElementById('timeInput').value;
+
+            if (principal && rate && time) {
+                const interest = (principal * rate * time) / 100;
+                document.getElementById('interestResult').innerHTML = `Interest Amount: ${interest} units`;
+            } else {
+                document.getElementById('interestResult').innerHTML = 'Please enter valid values for principal, rate, and time.';
+            }
+        }
+    </script>
+
+    <script>
+        function calculateTriangleArea() {
+            const base = document.getElementById('baseInput').value;
+            const height = document.getElementById('heightInput').value;
+
+            if (base && height) {
+                const area = (base * height) / 2;
+                document.getElementById('triangleAreaResult').innerHTML = `Triangle Area: ${area} square units`;
+            } else {
+                document.getElementById('triangleAreaResult').innerHTML = 'Please enter valid values for base and height.';
+            }
+        }
+    </script>
+    <canvas id="myChart3"></canvas>
+    <br>
+    <p class="center"><button id="showYear" class="hide"></button></p>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

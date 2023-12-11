@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>W3.CSS Template</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+
+<body>
+
+    <!-- Navbar (sit on top) -->
+    <div class="w3-top">
+        <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+            <a href="#home" class="w3-bar-item w3-button"><b>SNRU</b> SIWAKORN</a>
+            <!-- Float links to the right. Hide them on small screens -->
+            <div class="w3-right w3-hide-small">
+                <a href="index.html" class="w3-bar-item w3-button">Home</a>
+                <a href="java.html" class="w3-bar-item w3-button">JS Project</a>
+                <a href="api.html" class="w3-bar-item w3-button">Api</a>
+            </div>
+        </div>
+    </div>
+    <div class="w3-content w3-padding-64 w3-margin-top" style="max-width:1564px">
+        <h1>API</h1>
+        <hr>
+        <h2>Click to Change</h2>
+        <p id="demo2">Hi</p>
+        <button onclick="myfunction()">Click Now!</button>
+        <hr>
+
+        <h1>Random Dog Image</h1>
+        <button onclick="fetchRandomDog()">Get Dogs</button>
+        <img id="dogImage" width="400" height="300" alt="Random Dog" style="display:none;">
+        <hr>
+
+        <h1>Coinbase Exchange Rates (BTC)</h1>
+        <div id="coinbaseData"></div>
+        <button onclick="fetchCoinbaseData()">Get Coinbase Data</button>
+        <hr>
+
+        <h1>Cryptocurrency Prices</h1>
+        <div id="cryptoPrices"></div>
+        <button onclick="fetchCryptoPrices()">Get Crypto Prices</button>
+        <hr>
+
+        <div>
+            <form id="googleForm" method="POST" action="https://script.google.com/macros/s/AKfycbxpGJIJ-shNxG_fJMEZ4JN_LTXj2KKUU7W4aYBV7vQKjznkEZJleKhyJVopoH3Btw34/exec">
+                <input name="Email" type="email" placeholder="Email" required>
+                <input name="Name" type="text" placeholder="Name" required>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        <script>
+            function myfunction() {
+                fetch("https://catfact.ninja/fact")
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        let txt = "";
+                        for (let x in data) {
+                            txt += data[x] + " ";
+                            document.getElementById("demo2").innerHTML = txt;
+                        }
+                        return data;
+                    });
+            }
+
+            function fetchRandomDog() {
+                fetch('https://random.dog/woof.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        const url = data.url;
+                        document.getElementById('dogImage').src = url;
+                        document.getElementById('dogImage').style.display = 'block';
+                    })
+                    .catch(error => {
+                        console.error('Error fetching random dog', error);
+                    });
+            }
+
+            function fetchCoinbaseData() {
+                fetch('https://api.coinbase.com/v2/exchange-rates?currency=BTC')
+                    .then(response => response.json())
+                    .then(data => {
+                        const rates = data.data.rates;
+                        const coinbaseDataHtml = '<pre>' + JSON.stringify(rates, null, 2) + '</pre>';
+                        document.getElementById('coinbaseData').innerHTML = coinbaseDataHtml;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching Coinbase data', error);
+                    });
+            }
+
+            function fetchCryptoPrices() {
+                fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        const prices = data.bpi;
+                        const cryptoPricesHtml = '<pre>' + JSON.stringify(prices, null, 2) + '</pre>';
+                        document.getElementById('cryptoPrices').innerHTML = cryptoPricesHtml;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching crypto prices', error);
+                    });
+            }
+
+            const googleForm = document.getElementById('googleForm');
+            googleForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                submitGoogleForm();
+            });
+
+            function submitGoogleForm() {
+                googleForm.submit(); // Submit the form
+                alert('Form submitted successfully!');
+            }
+        </script>
+    </div>
+</body>
+
+</html>
